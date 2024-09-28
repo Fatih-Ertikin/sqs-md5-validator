@@ -1,5 +1,5 @@
 {
-  "name": "sqs-md5-validator",
+  "name": "@fatih-ertikin/sqs-md5-validator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,8 @@
     "release": "semantic-release"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "@fatih-ertikin:registry": "https://npm.pkg.github.com"
   },
   "keywords": [],
   "author": "",
