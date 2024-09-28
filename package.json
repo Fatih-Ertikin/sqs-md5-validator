@@ -1,7 +1,7 @@
 {
-  "name": "@fatih-ertikin/sqs-md5-validator",
+  "name": "sqs-md5-validator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Validate SQS message integrity via MD5 hashes (body & message attributes)",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -13,7 +13,26 @@
     "access": "public",
     "@fatih-ertikin:registry": "https://npm.pkg.github.com"
   },
-  "keywords": [],
+  "keywords": [
+    "aws",
+    "sqs",
+    "Simple Queue Service",
+    "aws sqs",
+    "md5",
+    "hash",
+    "integrity",
+    "validate",
+    "validator",
+    "message",
+    "body",
+    "attribute",
+    "message attribute",
+    "MessageAttributes",
+    "MD5OfMessageAttributes",
+    "MD5OfBody",
+    "queue",
+    "algorithm"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
