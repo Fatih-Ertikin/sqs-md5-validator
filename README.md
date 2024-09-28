@@ -9,7 +9,7 @@
 
 The SQS MD5 Validator is a tool designed to ensure the integrity of messages sent and received through Amazon Simple Queue Service (SQS). It calculates and verifies the MD5 hash of message bodies and message attributes to confirm that the content has not been altered during transmission.
 
-For message attributes itt does this by implementing the algorithm AWS specifies in [their documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html).
+For message attributes it does this by implementing the algorithm AWS specifies in [their documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html).
 
 ![algorithm](docs/images/algorithm.png)
 
