@@ -1,6 +1,7 @@
-import type { MessageAttributeValue } from "@aws-sdk/client-sqs";
+import { createHash } from "crypto";
+import type { Message, MessageAttributeValue } from "@aws-sdk/client-sqs";
 
-export function encodeSQSMessageAttribute(
+function encodeSQSMessageAttribute(
   attributeName: string,
   attributeValue: MessageAttributeValue
 ) {
@@ -92,4 +93,62 @@ export function encodeSQSMessageAttribute(
     valueLength,
     value,
   ]);
+}
+
+export function calculateMessageAttributesMD5(
+  attributes: Message["MessageAttributes"]
+) {
+  if (!attributes) {
+    return null;
+  }
+
+  // 1. sort all message attributes alphabetically (ascending, a-z)
+  const sortedKeys = Object.keys(attributes).sort();
+
+  // 2. encode each attribute indivually, starting a-z
+  const encodedAttributeBuffers = sortedKeys.map((key) =>
+    encodeSQSMessageAttribute(key, attributes[key])
+  );
+
+  // 3. flatten all buffers into a single one
+  const resultBuffer = Buffer.concat(encodedAttributeBuffers);
+
+  // 4. calculate the md5 hash for the entire buffer
+  return createHash("md5").update(resultBuffer).digest("hex");
+}
+
+export function validateMessageIntegrity(message: Message): boolean {
+  if (message.Body) {
+    const calculatedBodyMD5 = createHash("md5")
+      .update(message.Body)
+      .digest("hex");
+
+    if (!message.MD5OfBody) {
+      return false;
+    }
+
+    const bodyIntegrityIsValid = message.MD5OfBody === calculatedBodyMD5;
+
+    if (!bodyIntegrityIsValid) {
+      return false;
+    }
+  }
+
+  if (message.MessageAttributes) {
+    if (!message.MD5OfMessageAttributes) {
+      return false;
+    }
+
+    const calculatedMessageAttributesMD5 = calculateMessageAttributesMD5(
+      message.MessageAttributes
+    );
+    const messageAttributesIntegrityIsValid =
+      calculatedMessageAttributesMD5 === message.MD5OfMessageAttributes;
+
+    if (!messageAttributesIntegrityIsValid) {
+      return false;
+    }
+  }
+
+  return true;
 }
