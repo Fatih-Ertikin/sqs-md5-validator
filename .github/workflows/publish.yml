@@ -53,4 +53,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Use the NPM token stored in GitHub Secrets
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token to push version tags, create GitHub releases
-        run: npx semantic-release
+        run: npx semantic-release --force
