@@ -1,6 +1,6 @@
 {
   "name": "sqs-md5-validator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Validate SQS message integrity via MD5 hashes (body & message attributes)",
   "main": "dist/index.js",
   "scripts": {
