@@ -1,5 +1,5 @@
-# .github/workflows/publish-release.yml
-name: Publish to npm
+# .github/workflows/publish.yml
+name: Publish
 
 on:
   push:
@@ -7,8 +7,25 @@ on:
       - main  # Only run on pushes to 'main' branch
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
   release:
-    needs: build_test
     runs-on: ubuntu-latest
 
     steps:

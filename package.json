@@ -2,7 +2,7 @@
   "name": "@fatih-ertikin/sqs-md5-validator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",

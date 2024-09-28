@@ -1,0 +1,5 @@
+.husky
+dist
+.vscode/**
+out/**
+**/node_modules/**
